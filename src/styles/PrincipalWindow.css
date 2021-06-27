@@ -1,0 +1,53 @@
+.principal-window {
+  background-color: var(--first-color);
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.principal-content {
+  height: 100vh;
+  width: 100vw;
+}
+
+.principal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  height: 4rem;
+}
+
+.location-btn {
+  cursor: pointer;
+  background-color: #a0a0a090;
+  color: #ffffff;
+  border: none;
+  padding: 0 1rem;
+  transition: all 300ms ease-in-out;
+  height: 2.5rem;
+}
+
+.gps-btn {
+  cursor: pointer;
+  background-color: #a0a0a090;
+  color: #fff;
+  border: none;
+  transition: all 300ms ease-in-out;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 100%;
+}
+
+.location-btn:hover,
+.gps-btn:hover {
+  opacity: .75;
+}
+
+.current-weather-content {
+  height: calc(100vh - 4rem);
+  width: 100vw;
+}
