@@ -1,3 +1,27 @@
 .App {
-  background-color: var(--second-color);
+  background-color: var(--first-color);
+  min-height: 100vh;
+}
+
+.nav-main {
+  height: 4rem;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.btn-change-location {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  background-color: #e6e6e680;
+  color: #ffffff;
+  font-size: 1rem;
+  padding: .7rem 1rem;
+  transition: all 300ms ease-in-out;
+}
+
+.btn-change-location:hover {
+  opacity: .75;
 }
