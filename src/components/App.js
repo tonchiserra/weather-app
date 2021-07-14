@@ -2,20 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import '../styles/App.css';
 
 function App() {
-
-  const [temperature, setTemperature] = useState();
-  const [main, setMain] = useState();
-  const [description, setDescription] = useState();
-  const [date, setDate] = useState();
-  const [locName, setLocName] = useState();
-  const [wind, setWind] = useState();
-  const [humidity, setHumidity] = useState();
-  const [airPressure, setAirPressure] = useState();
-  const [flag, setFlag] = useState();
+  const [weather, setWeather] = useState({});
   const [icon, setIcon] = useState();
+  const [flag, setFlag] = useState();
+  const [locHistory, setLocHistory] = useState([]);
 
   const locationRef = useRef();
-
+  
   const browseWeatherByLocation = (location) => {
     localStorage.setItem("currentLocation", JSON.stringify(location));
 
@@ -28,18 +21,22 @@ function App() {
     .then((json) => {
       if(json.count <= 0){
         let message = "Oops... We couldn't find that location";
-        //console.log(message);
+        console.log(message);
       }else{
         //console.log(json);
         let fecha = new Date();
-        setTemperature(Math.trunc(json.list[0].main.temp));
-        setMain(json.list[0].weather[0].main);
-        setDescription(json.list[0].weather[0].description);
-        setDate(fecha.toDateString());
-        setLocName(json.list[0].name);
-        setWind(json.list[0].wind.speed);
-        setHumidity(json.list[0].main.humidity);
-        setAirPressure(json.list[0].main.pressure);
+
+        const newWeather = {
+          temperature: Math.trunc(json.list[0].main.temp),
+          main: json.list[0].weather[0].main,
+          description: json.list[0].weather[0].description,
+          date: fecha.toDateString(),
+          locName: json.list[0].name,
+          wind: json.list[0].wind.speed,
+          humidity: json.list[0].main.humidity,
+          airPressure: json.list[0].main.pressure
+        }
+        setWeather(newWeather);
 
         switch(json.list[0].weather[0].icon){
           case '01d':
@@ -91,7 +88,7 @@ function App() {
     })
     .catch((err) => {
       let message = "Oops... We couldn't find that location";
-      //console.log(message);
+      console.log(message);
       //console.log(err);
     })
   }
@@ -105,44 +102,89 @@ function App() {
       browseWeatherByLocation(storedLocation);
       setFlag(true);
     }
+
+    let history = JSON.parse(localStorage.getItem("locHistory"));
+    if(history === null){
+      setLocHistory([]);
+    }else{
+      setLocHistory(history);
+    }
   }, [])
 
-  const ChangeCurrentWeather = () => {
+  const showCLWindow = () => {
+    const $clw = document.querySelector(".change-location-window");
+    $clw.classList.toggle("clw-is-active");
+  }
+
+  const BrowseCurrentWeather = () => {
     const location = locationRef.current.value;
     if(location === '') return;
 
     locationRef.current.value = null;
 
-    browseWeatherByLocation(location)
+    browseWeatherByLocation(location);
+    showCLWindow();
+    
+    let history = JSON.parse(localStorage.getItem("locHistory"));
+    if(history === null){
+      history = [location]
+    }else{
+      history.push(location)
+    }
+    localStorage.setItem("locHistory", JSON.stringify(history));
+    setLocHistory(history);
   }
 
   return(
     <div className="App">
       <nav className="nav-main">
-        <button className="btn-change-location">Change location</button>
+        <button className="btn-change-location" onClick={showCLWindow}>Change location</button>
       </nav>
 
       <div className="change-location-window">
-        <input className="input-text" type="text" name="location" ref={locationRef} />
-        <input className="btn-search" type="submit" value="Browse" onClick={ChangeCurrentWeather} />
+        <div className="second-nav">
+          <input className="input-text" type="text" name="location" placeholder="Enter location" ref={locationRef} />
+          <input className="btn-search" type="submit" value="Browse" onClick={BrowseCurrentWeather} />
+          <button className="btn-close" onClick={showCLWindow}>X</button>
+        </div>
+        <div className="location-history">
+          {locHistory.map((loc) => (<button className="item-history">{loc}</button>))}
+        </div>
       </div>
 
-      <section className="weather-info">
+      <section className="current-weather-window">
         {flag
-          ? <div>
-              <p className="loc-name">{locName}</p>
-              <h2 className="temperature">{temperature}</h2>
-              <h2 className="main">{main}</h2>
-              <h2 className="description">{description}</h2>
-              <h2 className="date">{date}</h2>
-              <h2 className="wind">{wind}</h2>
-              <h2 className="humidity">{humidity}</h2>
-              <h2 className="air-pressure">{airPressure}</h2>
-              {icon}
+          ? <div className="weather-info">
+              <div className="current-principal">
+                {icon}
+                <div className="temperature">{weather.temperature}<p>°C</p></div>             
+                <p className="main">{weather.main}</p>
+                <p className="description">{weather.description}</p>
+                <p className="date">{weather.date}</p>
+                <p className="loc-name"><svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000"><g><rect fill="none" height="24" width="24" y="0"/></g><g><path d="M12,2c-4.2,0-8,3.22-8,8.2c0,3.18,2.45,6.92,7.34,11.23c0.38,0.33,0.95,0.33,1.33,0 C17.55,17.12,20,13.38,20,10.2C20,5.22,16.2,2,12,2z M12,12c-1.1,0-2-0.9-2-2c0-1.1,0.9-2,2-2c1.1,0,2,0.9,2,2 C14,11.1,13.1,12,12,12z" enable-background="new"/></g></svg>{weather.locName}</p>
+              </div>
+
+              <div className="current-hightlights">
+                <div className="current-hightlights-target">
+                  <h3>Wind</h3>
+                  <div className="wind">{weather.wind}<p>m/s</p></div>
+                </div>
+                <div className="current-hightlights-target">
+                  <h3>Humidity</h3>
+                  <div className="humidity">{weather.humidity}<p>%</p></div>
+                </div>
+                <div className="current-hightlights-target">
+                  <h3>Air pressure</h3>
+                  <div className="air-pressure">{weather.airPressure}<p> mb</p></div>
+                </div>
+              </div>
             </div>
-          : <h2 className="message">Select a location</h2>
+          : <p className="message">Select a location</p>
         }
       </section>
+      <footer className="footer">
+        <p>Web App developed by <a href="https://gserra.netlify.app/" target="_blank" title="Web de Gonzalo Serra" rel="noopener noreferrer">Gonzalo Serra</a>.</p>
+      </footer>
     </div>
   );
 }

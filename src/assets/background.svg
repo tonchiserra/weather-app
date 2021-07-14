@@ -1,0 +1,52 @@
+<svg width="414" height="736" viewBox="0 0 414 736" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<g opacity="0.1">
+<ellipse cx="67.9394" cy="100.342" rx="58.1267" ry="52.3416" fill="white"/>
+<ellipse cx="13.6694" cy="100.617" rx="22.5895" ry="21.2121" fill="white"/>
+<ellipse cx="13.9449" cy="137.256" rx="39.9449" ry="31.9559" fill="white"/>
+<ellipse cx="53.8898" cy="133.95" rx="49.0358" ry="35.2617" fill="white"/>
+<ellipse cx="116.149" cy="136.705" rx="38.5675" ry="32.5069" fill="white"/>
+<ellipse cx="125.791" cy="124.86" rx="48.2094" ry="44.3526" fill="white"/>
+<rect x="13.6694" y="125.686" width="112.397" height="43.5262" fill="white"/>
+</g>
+<g opacity="0.1">
+<ellipse cx="324.939" cy="221.342" rx="58.1267" ry="52.3416" fill="white"/>
+<ellipse cx="270.669" cy="221.617" rx="22.5895" ry="21.2121" fill="white"/>
+<ellipse cx="270.945" cy="258.256" rx="39.9449" ry="31.9559" fill="white"/>
+<ellipse cx="310.89" cy="254.95" rx="49.0358" ry="35.2617" fill="white"/>
+<ellipse cx="373.149" cy="257.705" rx="38.5675" ry="32.5069" fill="white"/>
+<ellipse cx="382.791" cy="245.86" rx="48.2094" ry="44.3526" fill="white"/>
+<rect x="270.669" y="246.686" width="112.397" height="43.5262" fill="white"/>
+</g>
+<g opacity="0.1">
+<ellipse cx="107.939" cy="342.342" rx="58.1267" ry="52.3416" fill="white"/>
+<ellipse cx="53.6694" cy="342.617" rx="22.5895" ry="21.2121" fill="white"/>
+<ellipse cx="53.9449" cy="379.256" rx="39.9449" ry="31.9559" fill="white"/>
+<ellipse cx="93.8898" cy="375.95" rx="49.0358" ry="35.2617" fill="white"/>
+<ellipse cx="156.149" cy="378.705" rx="38.5675" ry="32.5069" fill="white"/>
+<ellipse cx="165.791" cy="366.859" rx="48.2094" ry="44.3526" fill="white"/>
+<rect x="53.6694" y="367.686" width="112.397" height="43.5262" fill="white"/>
+</g>
+<g opacity="0.1">
+<ellipse cx="386.939" cy="463.342" rx="58.1267" ry="52.3416" fill="white"/>
+<ellipse cx="332.669" cy="463.617" rx="22.5895" ry="21.2121" fill="white"/>
+<ellipse cx="332.945" cy="500.256" rx="39.9449" ry="31.9559" fill="white"/>
+<ellipse cx="372.89" cy="496.95" rx="49.0358" ry="35.2617" fill="white"/>
+<ellipse cx="435.149" cy="499.705" rx="38.5675" ry="32.5069" fill="white"/>
+<ellipse cx="444.791" cy="487.86" rx="48.2094" ry="44.3526" fill="white"/>
+<rect x="332.669" y="488.686" width="112.397" height="43.5262" fill="white"/>
+</g>
+<g opacity="0.1">
+<ellipse cx="1.93941" cy="584.342" rx="58.1267" ry="52.3416" fill="white"/>
+<ellipse cx="-12.1102" cy="617.95" rx="49.0358" ry="35.2617" fill="white"/>
+<ellipse cx="50.1488" cy="620.705" rx="38.5675" ry="32.5069" fill="white"/>
+<ellipse cx="59.7906" cy="608.859" rx="48.2094" ry="44.3526" fill="white"/>
+<rect x="-52.3306" y="609.686" width="112.397" height="43.5262" fill="white"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="414" height="736" fill="white"/>
+</clipPath>
+</defs>
+</svg>

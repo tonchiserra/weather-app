@@ -1,8 +1,9 @@
 :root {
   --first-color: #1d1a53;
   --second-color: #0b0a1d;
-  --font: Helvetica, sans-serif;
+  --font: 'Ubuntu', sans-serif;
   --text-color: #ffffff;
+  --second-text-color: #d4d4d4d7;
 
 }
 
