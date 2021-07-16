@@ -25,7 +25,7 @@ function App() {
         let message = "Oops... We couldn't find that location";
         console.log(message);
       }else{
-        //console.log(json);
+        console.log(json);
         let fecha = new Date();
 
         const newWeather = {
@@ -34,6 +34,7 @@ function App() {
           description: json.list[0].weather[0].description,
           date: fecha.toDateString(),
           locName: json.list[0].name,
+          feelsLike: Math.trunc(json.list[0].main.feels_like),
           wind: json.list[0].wind.speed,
           humidity: json.list[0].main.humidity,
           airPressure: json.list[0].main.pressure
@@ -120,25 +121,27 @@ function App() {
 
   return(
     <div className="App">
-      <nav className="nav-main">
-        <button className="btn-change-location" onClick={showCLWindow}>Change location</button>
-      </nav>
+      <section className="app-container">
+        <nav className="nav-main">
+          <button className="btn-change-location" onClick={showCLWindow}>Change location</button>
+        </nav>
 
-      <ChangeLocationWindow 
-        locHistory={locHistory}
-        browseWeatherByLocation={browseWeatherByLocation}
-        showCLWindow={showCLWindow}
-        setLocHistory={setLocHistory}
-      />
+        <ChangeLocationWindow 
+          locHistory={locHistory}
+          browseWeatherByLocation={browseWeatherByLocation}
+          showCLWindow={showCLWindow}
+          setLocHistory={setLocHistory}
+        />
 
-      <section className="current-weather-window">
-        {flag
-          ? <WeatherInfo weather={weather} icon={icon} /> 
-          : <p className="message">Select a location</p>
-        }
+        <section className="current-weather-window">
+          {flag
+            ? <WeatherInfo weather={weather} icon={icon} /> 
+            : <p className="message">Select a location</p>
+          }
+        </section>
+        
+        <Footer />
       </section>
-      
-      <Footer />
     </div>
   );
 }
