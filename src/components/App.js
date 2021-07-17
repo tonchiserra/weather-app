@@ -10,11 +10,12 @@ function App() {
   const [icon, setIcon] = useState();
   const [flag, setFlag] = useState();
   const [locHistory, setLocHistory] = useState([]);
+  const [message, setMessage] = useState();
   
   const browseWeatherByLocation = (location) => {
     localStorage.setItem("currentLocation", JSON.stringify(location));
 
-    let myRequest = new Request(`http://api.openweathermap.org/data/2.5/find?q=${location}&units=metric&appid=1bc031be45fada06ac09b44c3665f8de`);
+    let myRequest = new Request(`https://api.openweathermap.org/data/2.5/find?q=${location}&units=metric&appid=1bc031be45fada06ac09b44c3665f8de`);
     fetch(myRequest)
     .then((res) => {
       //console.log(res)
@@ -23,7 +24,8 @@ function App() {
     .then((json) => {
       if(json.count <= 0){
         let message = "Oops... We couldn't find that location";
-        //console.log(message);
+        setMessage(message);
+        setFlag(false);
       }else{
         //console.log(json);
         let fecha = new Date();
@@ -87,12 +89,15 @@ function App() {
           default:
             setIcon("Imagen no disponible");
         }
+        setFlag(true);
       }
     })
     .catch((err) => {
       let message = "Oops... We couldn't find that location";
-      console.log(message);
+      //console.log(message);
       //console.log(err);
+      setMessage(message);
+      setFlag(false);
     })
   }
 
@@ -100,7 +105,9 @@ function App() {
     let storedLocation = JSON.parse(localStorage.getItem("currentLocation")); 
     if(storedLocation === null){
       //console.log("no hay nada kpo");
-      setFlag(false)
+      let message = "Select a location";
+      setFlag(false);
+      setMessage(message);
     }else{
       browseWeatherByLocation(storedLocation);
       setFlag(true);
@@ -135,8 +142,8 @@ function App() {
 
         <section className="current-weather-window">
           {flag
-            ? <WeatherInfo weather={weather} icon={icon} /> 
-            : <div className="message-content" ><p className="message">Select a location</p></div>
+            ? <WeatherInfo weather={weather} icon={icon} />
+            : <div className="message-content" ><p className="message">{message}</p></div>
           }
         </section>
         
