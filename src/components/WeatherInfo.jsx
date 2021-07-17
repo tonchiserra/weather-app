@@ -14,7 +14,7 @@ export function WeatherInfo({weather, icon}){
       </div>
 
       <div className="current-hightlights">
-      <CurrentHightlightsTarget weather={weather.feelsLike} name={"Feels Like"} unit={"°C"} />
+        <CurrentHightlightsTarget weather={weather.feelsLike} name={"Feels Like"} unit={"°C"} />
         <CurrentHightlightsTarget weather={weather.wind} name={"Wind"} unit={"m/s"} />
         <CurrentHightlightsTarget weather={weather.humidity} name={"Humidity"} unit={"%"} />
         <CurrentHightlightsTarget weather={weather.airPressure} name={"Air Pressure"} unit={"mb"} />

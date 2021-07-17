@@ -121,11 +121,19 @@
   min-height: 100vh;
 }
 
+.message-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: calc(100vh - 4rem);
+}
+
 .message {
   font-size: 2rem;
   color: var(--second-text-color);
   text-align: center;
-  margin-top: 30vh;
 }
 
 .weather-info {
@@ -282,6 +290,10 @@
     top: 0;
     left: 0;
     width: 30%;
+  }
+
+  .message {
+    margin: 0;
   }
 
   .weather-info {

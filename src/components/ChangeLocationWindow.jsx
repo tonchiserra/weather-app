@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import { v4 as uuidv4 } from 'uuid';
+import { ItemHistory } from "./ItemHistory.jsx";
 
 export function ChangeLocationWindow({locHistory, browseWeatherByLocation, showCLWindow, setLocHistory}){
 
@@ -13,14 +15,30 @@ export function ChangeLocationWindow({locHistory, browseWeatherByLocation, showC
     browseWeatherByLocation(location);
     showCLWindow();
 
+    const newLocHistory = {
+      location: location,
+      id: uuidv4()
+    }
+
     let history = JSON.parse(localStorage.getItem("locHistory"));
     if(history === null){
-      history = [location]
+      history = [newLocHistory];
     }else{
-      history.push(location)
+      if(history.length === 7){
+        history.shift();
+      }
+      history.push(newLocHistory);
     }
     localStorage.setItem("locHistory", JSON.stringify(history));
     setLocHistory(history);
+  }
+
+  const browseWeatherByHistory = (id) => {
+    const historyStored = JSON.parse(localStorage.getItem("locHistory"));
+    const currentLocHistory = historyStored.find((currentLocHistory) => currentLocHistory.id === id);
+
+    browseWeatherByLocation(currentLocHistory.location);
+    showCLWindow();
   }
 
   return(
@@ -31,7 +49,7 @@ export function ChangeLocationWindow({locHistory, browseWeatherByLocation, showC
         <button className="btn-close" onClick={showCLWindow}>X</button>
       </div>
       <div className="location-history">
-        {locHistory.map((loc) => (<button className="item-history">{loc}</button>))}
+        {locHistory.map((loc) => (<ItemHistory key={loc.id} loc={loc} browseWeatherByHistory={browseWeatherByHistory} />))}
       </div>
     </div>
   );

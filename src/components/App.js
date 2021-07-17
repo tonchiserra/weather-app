@@ -23,9 +23,9 @@ function App() {
     .then((json) => {
       if(json.count <= 0){
         let message = "Oops... We couldn't find that location";
-        console.log(message);
+        //console.log(message);
       }else{
-        console.log(json);
+        //console.log(json);
         let fecha = new Date();
 
         const newWeather = {
@@ -136,7 +136,7 @@ function App() {
         <section className="current-weather-window">
           {flag
             ? <WeatherInfo weather={weather} icon={icon} /> 
-            : <p className="message">Select a location</p>
+            : <div className="message-content" ><p className="message">Select a location</p></div>
           }
         </section>
         
